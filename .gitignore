@@ -52,4 +52,4 @@ nbdist/
 # End of https://www.toptal.com/developers/gitignore/api/vscode,netbeans,java,java-web
 
 # databases
-*_db/
+*DB/

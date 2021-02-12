@@ -1,4 +1,4 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -15,21 +15,44 @@ and open the template in the editor.
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
       crossorigin="anonymous"
     />
+
+    <style>
+      html,
+      body {
+				width: 50%;
+      }
+
+			form {
+				align-self: center;
+			}
+
+			.main-form {
+				margin: auto;
+				align-content: center;
+			}
+    </style>
   </head>
-  <body style="min-height: 100%; text-align: center;">
-    <div class="container h-100">
-      <div class="row align-items-center h-100">
-        <div class="col-6 mx-auto">
-          <div class="jumbotron">
-            <form action="Library" method="GET">
-              <div class="row justify-content-center align-self-center">
-                <button class="btn btn-primary">Launch application</button>
-              </div>
-            </form>
-          </div>
-        </div>
+  <body>
+    <form action="Library" class="main-form" method="POST">
+      <div class="form-group">
+        <label for="username">Inserisci uno username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Inserisci una password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+        />
       </div>
 
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
 
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
