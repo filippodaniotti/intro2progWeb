@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <filter id="AuthFilter">
+    <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>it.unitn.disi.pips.web.app.AuthFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
-        <servlet-name>Library</servlet-name>
+        <url-pattern>/library.jsp</url-pattern>
     </filter-mapping>
     <servlet>
-        <servlet-name>Library</servlet-name>
-        <servlet-class>it.unitn.disi.pips.web.app.Library</servlet-class>
+        <servlet-name>getInfo</servlet-name>
+        <servlet-class>it.unitn.disi.pips.web.app.getInfo</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Library</servlet-name>
-        <url-pattern>/Library</url-pattern>
+        <servlet-name>getInfo</servlet-name>
+        <url-pattern>/getInfo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

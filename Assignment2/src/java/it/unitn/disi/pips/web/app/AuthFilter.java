@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author pips
  */
- @WebFilter(filterName = "AuthFilter", urlPatterns = {"/Library"})
+@WebFilter(filterName = "AuthFilter", urlPatterns = {"/library.jsp"})
 public class AuthFilter implements Filter {
      
     private String dbURL = "jdbc:derby://localhost:1527/LibraryDB";

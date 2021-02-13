@@ -1,11 +1,13 @@
+DROP TABLE IF EXISTS BOOKS;
+
 CREATE TABLE BOOKS (
-    TITLE VARCHAR(255) NOT NULL PRIMARY KEY,
     AUTHOR VARCHAR(255) NOT NULL,
+    TITLE VARCHAR(255) NOT NULL PRIMARY KEY,
     DESCRIPTION VARCHAR(255),
     COVERURL VARCHAR(255)
 ); 
 
-INSERT INTO BOOKS VALUES ('Le assaggiatrici', 'Rosella Postorino', 'La prima volta in cui Rosa Sauer entra nella stanza in cui dovrà consumare i suoi prossimi pasti è affamata.', 'https://img.ibs.it/images/2000000038292_0_221_0_75.jpg');
+INSERT INTO BOOKS VALUES ('Rosella Postorino', 'Le assaggiatrici', 'La prima volta in cui Rosa Sauer entra nella stanza in cui dovrà consumare i suoi prossimi pasti è affamata.', 'https://img.ibs.it/images/2000000038292_0_221_0_75.jpg');
 INSERT INTO BOOKS VALUES ('Carlo Rovelli', 'Helgoland', 'La storia avventurosa della più radicale rivoluzione scientifica di ogni tempo e la sua proiezione nel futuro.', 'https://img.ibs.it/images/9788845982941_0_0_300_75.jpg');
 INSERT INTO BOOKS VALUES ('J.D. Salinger', 'The catcher in the rye', 'The brilliant, funny, meaningful novel (The New Yorker) that established J. D. Salinger as a leading voice in American literature--and that has instilled in millions of readers around the world a lifelong love of books.', 'http://www.barnesandnoble.com/blog/barnesy/wp-content/uploads/2013/12/the-catcher-in-the-rye-cover-56ad87b65e91ecee30641f4d60fda347.jpg');
 INSERT INTO BOOKS VALUES ('Pedro Domingos', 'The master algorithm', 'A spell-binding quest for the one algorithm capable of deriving all knowledge from data, including a cure for cancer', 'http://s.s-bol.com/imgbase0/imagebase3/large/FC/9/3/5/9/9200000047969539.jpg');

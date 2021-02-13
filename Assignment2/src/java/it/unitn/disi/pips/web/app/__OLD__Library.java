@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  * @author pips
  */
 @WebServlet(name = "Library", urlPatterns = {"/Library"})
-public class Library extends HttpServlet {
+public class __OLD__Library extends HttpServlet {
 
     // Prepare db connection information
     private String dbURL = "jdbc:derby://localhost:1527/LibraryDB";
