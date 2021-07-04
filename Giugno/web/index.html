@@ -9,14 +9,18 @@ and open the template in the editor.
         <title>Minesweeper</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="index.css">
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     </head>
-    <body>
-        <div>
-            <form action="GameInit" method="GET">
-                <label for="name">Hi! What is your name?</label>
-                <input type="text" name="name" required>
-                <button type="submit">Start new game</button>
-            </form>
-        </div>
+    <body class="text-center">
+        <form class="form-signin center" method="POST" action="/Giugno/createGame">
+            <h1 class="h3 mb-3 font-weight-normal">Please enter your name</h1>
+            <input type="text" class="form-control formInput" placeholder="Your username" name="username" required autofocus>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        </form>
     </body>
 </html>
