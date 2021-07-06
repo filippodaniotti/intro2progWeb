@@ -1,0 +1,29 @@
+// ITEM DATA: Title, description, price, best offerer name, seconds to the deadline
+        String itemdata1[] = {
+            "DVD Film I sogni segreti di Walter Mitty",
+            "Film del 2013 diretto da Ben Stiller e con protagonisti lo stesso Ben Stiller, Kristen Wiig e Sean Penn",
+            "1",
+            "user1",
+            "600"
+        };
+        //
+        String itemdata2[] = {
+            "Trenino Lima E.424",
+            "Modello in scala N, funzionante",
+            "1",
+            "user1",
+            "300"
+        };
+        //
+        String itemdata3[] = {
+            "Microprocessore ESP32",
+            "Scheda di sviluppo ESP32 NodeMCU WiFi con CP2102 (modello successivo a ESP8266) incluso E-Book!",
+            "2",
+            "user2",
+            "30"
+        };
+
+// USER DATA: username and password
+        String userdata1[] = {"user1", "pw1"};
+        String userdata2[] = {"user2", "pw2"};
+        String userdata3[] = {"user3", "pw3"};
