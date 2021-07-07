@@ -5,23 +5,32 @@
  */
 package it.unitn.disi.filippo.servlets;
 
-import it.unitn.disi.filippo.beans.UserBean;
+import it.unitn.disi.filippo.beans.ItemBeanList;
 import it.unitn.disi.filippo.config.Config;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Filippo
  */
-public class Login extends HttpServlet {
+public class Home extends HttpServlet {
+    
+    @Override
+    public void init() {
+        ServletContext ctx = getServletContext();
+        
+        if (ctx.getAttribute(Config.userBeanListKey) == null ||
+            ctx .getAttribute(Config.itemBeanListKey) == null) {
+            
+            Config.loadData(ctx);
+        }
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,30 +44,15 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        HttpSession session = null;
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String url;
-        
-        if (username != null && !username.equals("") &&
-            password != null && !password.equals("")) {
-            
-            ServletContext ctx = getServletContext();
-            List<UserBean> users = (List<UserBean>) ctx.getAttribute(Config.userBeanListKey);
-            UserBean user = new UserBean(username, password);
-            
-            if (users != null && users.contains(user)) {
-                url = "/2021_Giugno/HomeController";
-                session = request.getSession(true);
-                request.getRequestURI();
-                session.setAttribute("username", username);
-                session.setAttribute("user", user);
-                url = response.encodeURL(url);
-                response.sendRedirect(url);
-            }
-        }
-        
+
+        String viewURL = "/WEB-INF/HomeView.jsp";
+        ServletContext ctx = getServletContext();
+        ItemBeanList items = (ItemBeanList) ctx.getAttribute(Config.itemBeanListKey);
+        ItemBeanList active = items.getActiveAuctions();
+            request.setAttribute("activeItems", active);
+
+        request.getRequestDispatcher(viewURL).forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

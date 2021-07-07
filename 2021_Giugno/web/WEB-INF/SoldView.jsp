@@ -25,7 +25,7 @@
         <jsp:useBean id="expiredItems" class="it.unitn.disi.filippo.beans.ItemBeanList" scope="request"/>
         <div class="main-container">
             <% for (ItemBean item : expiredItems) {%>
-            <a href="/2021_Giugno/DetailController?id=\"<%= item.getID() %>">
+            <a href="/2021_Giugno/DetailController?id=<%= item.getID() %>">
                 <%= item.getTitle()%>
             </a>
             <br/>

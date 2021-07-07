@@ -5,13 +5,8 @@
  */
 package it.unitn.disi.filippo.servlets;
 
-import it.unitn.disi.filippo.beans.ItemBean;
-import it.unitn.disi.filippo.beans.ItemBeanList;
-import it.unitn.disi.filippo.config.Config;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Filippo
  */
-public class DetailController extends HttpServlet {
+public class SendOffer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,22 +31,8 @@ public class DetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String viewURL = "/WEB-INF/DetailView.jsp";
-        ServletContext ctx = getServletContext();
-        String id = request.getParameter("id");
-        ItemBeanList items = (ItemBeanList) ctx.getAttribute(Config.itemBeanListKey);
         
-        ItemBean item = null;
-        for (ItemBean it : items) {
-            if (it.getID().equals(id)) {
-                item = it;
-            }
-        }
-//        Date d = new Date();
-//        item.setDeadline(d.getTime() - item.getDeadline().getTime());
-            request.setAttribute("item", item);
-
-        request.getRequestDispatcher(viewURL).forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -11,9 +11,14 @@
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/DetailController</url-pattern>
     </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/SendOffer</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>HomeController</servlet-name>
-        <servlet-class>it.unitn.disi.filippo.servlets.HomeController</servlet-class>
+        <servlet-class>it.unitn.disi.filippo.servlets.Home</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Login</servlet-name>
@@ -25,11 +30,15 @@
     </servlet>
     <servlet>
         <servlet-name>SoldController</servlet-name>
-        <servlet-class>it.unitn.disi.filippo.servlets.SoldController</servlet-class>
+        <servlet-class>it.unitn.disi.filippo.servlets.Sold</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DetailController</servlet-name>
-        <servlet-class>it.unitn.disi.filippo.servlets.DetailController</servlet-class>
+        <servlet-class>it.unitn.disi.filippo.servlets.Detail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendOffer</servlet-name>
+        <servlet-class>it.unitn.disi.filippo.servlets.SendOffer</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -50,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>DetailController</servlet-name>
         <url-pattern>/DetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendOffer</servlet-name>
+        <url-pattern>/SendOffer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

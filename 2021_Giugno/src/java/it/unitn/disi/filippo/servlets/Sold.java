@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Filippo
  */
-public class HomeController extends HttpServlet {
+public class Sold extends HttpServlet {
     
     @Override
     public void init() {
@@ -44,15 +44,15 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String viewURL = "/WEB-INF/HomeView.jsp";
+        
+        String viewURL = "/WEB-INF/SoldView.jsp";
         ServletContext ctx = getServletContext();
         ItemBeanList items = (ItemBeanList) ctx.getAttribute(Config.itemBeanListKey);
-        ItemBeanList active = items.getActiveAuctions();
-            request.setAttribute("activeItems", active);
+        ItemBeanList expired = items.getExpiredAuctions();
+            request.setAttribute("expiredItems", expired);
 
         request.getRequestDispatcher(viewURL).forward(request, response);
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

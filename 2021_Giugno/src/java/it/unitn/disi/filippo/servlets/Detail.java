@@ -5,32 +5,24 @@
  */
 package it.unitn.disi.filippo.servlets;
 
+import it.unitn.disi.filippo.beans.ItemBean;
 import it.unitn.disi.filippo.beans.ItemBeanList;
 import it.unitn.disi.filippo.config.Config;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Filippo
  */
-public class SoldController extends HttpServlet {
-    
-    @Override
-    public void init() {
-        ServletContext ctx = getServletContext();
-        
-        if (ctx.getAttribute(Config.userBeanListKey) == null ||
-            ctx .getAttribute(Config.itemBeanListKey) == null) {
-            
-            Config.loadData(ctx);
-        }
-    }
+public class Detail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,14 +37,34 @@ public class SoldController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String viewURL = "/WEB-INF/SoldView.jsp";
+        String viewURL = "/WEB-INF/DetailView.jsp";
         ServletContext ctx = getServletContext();
+        String id = request.getParameter("id");
         ItemBeanList items = (ItemBeanList) ctx.getAttribute(Config.itemBeanListKey);
-        ItemBeanList expired = items.getExpiredAuctions();
-            request.setAttribute("expiredItems", expired);
+        
+        boolean bestOfferer = false;
+        boolean auctionOn = false;
+        
+        ItemBean item = null;
+        for (ItemBean it : items) {
+            if (it.getID().equals(id)) {
+                item = it;
+            }
+        }   
+        HttpSession session = request.getSession(false);
+        String username = (String) session.getAttribute("username");
+        if (username.equals(item.getBestOfferer())) {
+            bestOfferer = true;
+        }
+        if (item.getDeadline().getTime() > new Date().getTime()) {
+            auctionOn = true;
+        }
+        
+        request.setAttribute("isAuctionOn", auctionOn);
+        request.setAttribute("isBestOfferer", bestOfferer);
+        request.setAttribute("item", item);
 
         request.getRequestDispatcher(viewURL).forward(request, response);
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
