@@ -1,54 +1,65 @@
 <%-- 
     Document   : game
-    Created on : Feb 15, 2021, 11:23:23 AM
+    Created on : Jul 8, 2021, 4:43:30 PM
     Author     : Filippo
 --%>
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="it.unitn.disi.filippo.commons.Coppia"%>
+<%@page import="it.unitn.disi.filippo.commons.MappaDiCoppie"%>
+<%
+    String key = (String) session.getAttribute("gameKey");
+    MappaDiCoppie map = (MappaDiCoppie) application.getAttribute("map");
+    Coppia current = map.get(key);
+
+    ArrayList<String> wordList = null;
+    String user = (String) session.getAttribute("name");
+    if (user.equals(key)) {
+        wordList = current.getList1();
+    } else {
+        wordList = current.getList2();
+    }
+%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="js/frontend.js"></script>
+        <link rel="stylesheet" href="index.css">
+
+        <script src="js/game.js"></script>
+        <link rel="stylesheet" href="https://latemar.science.unitn.it/esameWeb/Libraries/bootstrap.min.4.5.0.css">
+
+        <script src="https://latemar.science.unitn.it/esameWeb/Libraries/popper.min.1.16.0.js"></script>
+        <script src="https://latemar.science.unitn.it/esameWeb/Libraries/jquery.min.3.4.1.js"></script>
+        <script src="https://latemar.science.unitn.it/esameWeb/Libraries/bootstrap.min.4.5.0.js"></script>
         <title>Game</title>
     </head>
     <body>
-        <h1 style="text-align: center">Giuoco</h1>
-        <div class="container">
+        <div class="main-container">
+            <h1>Il gioco</h1>
             <div class="row">
-                <div class="col-sm-6" id="image"></div>
-                <div class="col-sm-6">
-                    <table id="words" class="table">
-                        <tr>
-                            <th>
-                                <p>Word list</p>
-                            </th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-sm-6">
-                    <div id="sender">
-                        <input type="text" class=""form-control id="textbar">
-                        <button class="btn btn-outline-dark btn-sm" onclick="addWord()">Send</button>
+                <div class="main-container column">
+                    <img src="<%=current.getImage()%>" alt="image" width="500" height="400">
+                    <hr/>
+                    <div class="input-group" id="wordField">
+                        <input class="form-control" id="word" placeholder="Type your word" autofocus>
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" onclick="sendWord('<%=key%>', '<%=user%>')">Go!</button>
+                        </span>
                     </div>
                 </div>
+                <div class="main-container column">
+                    <h3>Current words</h3>
+                    <hr>
+                    <ul id="wordList">
+                        <%for (String word : wordList) {%>
+                            <li><%=word%></li>
+                        <%}%>
+                    </ul>
+                </div>
             </div>
-       </div>
-        
-      <script>
-          loadImage($.urlParam('pic'));
-          setTimeout(checkWin, 2000);
-          if (window.closed) {
-              console.log('unbinding');
-              unbind();
-          }
-      </script>
-      
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+        </div>
     </body>
 </html>

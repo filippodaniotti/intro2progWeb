@@ -1,0 +1,39 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 8, 2021, 3:54:21 PM
+    Author     : Filippo
+*/
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.main-container {
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

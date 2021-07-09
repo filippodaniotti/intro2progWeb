@@ -1,6 +1,6 @@
 <%-- 
-    Document   : wait
-    Created on : Jul 8, 2021, 4:37:26 PM
+    Document   : resetAll
+    Created on : Jul 9, 2021, 12:07:32 PM
     Author     : Filippo
 --%>
 
@@ -11,23 +11,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
         <link rel="stylesheet" href="index.css">
-        
         <link rel="stylesheet" href="https://latemar.science.unitn.it/esameWeb/Libraries/bootstrap.min.4.5.0.css">
         
-        <script src="https://latemar.science.unitn.it/esameWeb/Libraries/popper.min.1.16.0.js"></script>
-        <script src="https://latemar.science.unitn.it/esameWeb/Libraries/jquery.min.3.4.1.js"></script>
         <script src="https://latemar.science.unitn.it/esameWeb/Libraries/bootstrap.min.4.5.0.js"></script>
-        <title>Wait</title>
+        <script src="https://latemar.science.unitn.it/esameWeb/Libraries/jquery.min.3.4.1.js"></script>
+        <script src="https://latemar.science.unitn.it/esameWeb/Libraries/popper.min.1.16.0.js"></script>
+        <title>Reset all</title>
     </head>
-    <body class='main-container center'>
-        <h1>Attendi l'arrivo di un nuovo giocatore <span id="counter">0</span>...</h1>
+    <body class="main-container center">
+        <h1>Context will be re-initialize, wait a moment...</h1>
         
-        <script src="js/wait.js"></script>
         <script>
             $(document).ready(function() {
-               user = "<%=session.getAttribute("name")%>";
-               setTimeout(refresh, 2000); 
+                setTimeout(function() {
+                    window.location.replace(`/Reset?all=true`);
+                }, 2000);
             });
+                
         </script>
     </body>
 </html>
