@@ -21,3 +21,11 @@ and open the template in the editor.
     padding-left: 40px;
     padding-right: 40px;
 }
+
+table {
+    margin-left: 30%;
+    margin-right: 30%;
+    align-self: center;
+    border: 1px solid black;
+    border-collapse: collapse;
+}

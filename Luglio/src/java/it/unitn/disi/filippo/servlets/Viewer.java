@@ -40,24 +40,39 @@ public class Viewer extends HttpServlet {
         ServletContext ctx = getServletContext();
         MessageQueue all = (MessageQueue) ctx.getAttribute(Config.queue);
         if (all == null) {
-            request.setAttribute("none", true);
+            request.setAttribute("none", "true");
+            session = request.getSession(true);
+            session.setAttribute("read", "0");
+            String rate = (String) request.getParameter("rate");
+            if (rate != null) {
+                request.setAttribute("rate", rate);
+            } else {
+                request.setAttribute("rate", Config.defaultRefreshRate);
+            }
         } else {
-            request.setAttribute("none", false);
+            request.setAttribute("none", "false");
             if (session == null) {
                 session = request.getSession(true);
 
                 MessageQueue msgs = all.getMessagesFrom(0);
                 session.setAttribute("read", Integer.toString(msgs.size()));
                 request.setAttribute("messages", msgs);
+                request.setAttribute("rate", Config.defaultRefreshRate);
             } else {
                 String viewAll = (String) request.getParameter("index");
                 int index = 0;
                 if (viewAll != null) {
                     index = Integer.parseInt(viewAll);
-
+                    request.setAttribute("rate", Config.defaultRefreshRate);
                 } else {
                     String sIndex = (String) session.getAttribute("read");
                     index = Integer.parseInt(sIndex);
+                    String rate = (String) request.getParameter("rate");
+                    if (rate != null) {
+                        request.setAttribute("rate", rate);
+                    } else {
+                        request.setAttribute("rate", Config.defaultRefreshRate);
+                    }
                 }
 
                 MessageQueue msgs = all.getMessagesFrom(index);

@@ -8,6 +8,10 @@
         <servlet-name>Viewer</servlet-name>
         <servlet-class>it.unitn.disi.filippo.servlets.Viewer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CloseWebcasting</servlet-name>
+        <servlet-class>it.unitn.disi.filippo.servlets.CloseWebcasting</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddMessage</servlet-name>
         <url-pattern>/AddMessage</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>Viewer</servlet-name>
         <url-pattern>/Viewer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CloseWebcasting</servlet-name>
+        <url-pattern>/CloseWebcasting</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,11 +5,8 @@
  */
 package it.unitn.disi.filippo.servlets;
 
-import it.unitn.disi.filippo.beans.MessageQueue;
-import it.unitn.disi.filippo.util.Config;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Filippo
  */
-public class AddMessage extends HttpServlet {
+public class CloseWebcasting extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,37 +29,18 @@ public class AddMessage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json;charset=UTF-8");
-
-        ServletContext ctx = getServletContext();
-        boolean close = false;
-        String message = request.getParameter("message");
-        if (message.equals("END")) {
-            close = true;
-            ctx.removeAttribute(Config.queue);
-        } else {
-            MessageQueue msgs = (MessageQueue) ctx.getAttribute(Config.queue);
-            if (msgs == null) {
-                Config.initialize(ctx);
-                msgs = (MessageQueue) ctx.getAttribute(Config.queue);
-                msgs.add(message);
-            } else {
-                msgs.add(message);
-            }
-        }
-
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("{\"close\":" + close + "}");
-        }
-    }
-
-    @Override
-    public void init() throws ServletException {
-        ServletContext ctx = getServletContext();
-        MessageQueue msgs = (MessageQueue) ctx.getAttribute(Config.queue);
-        if (msgs == null) {
-            Config.initialize(ctx);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet CloseWebcasting</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet CloseWebcasting at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

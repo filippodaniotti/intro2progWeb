@@ -4,7 +4,7 @@
     Author     : Filippo
 --%>
 <%
-    boolean none = Boolean.parseBoolean(request.getParameter("none"));
+    boolean none = Boolean.parseBoolean((String)request.getAttribute("none"));
 %>
 
 <%@page import="it.unitn.disi.filippo.beans.MessageQueue"%>
@@ -23,14 +23,15 @@
     </head>
     <body>
         <div class="main-container text-center">
-            <%if (!none) {%>
             <jsp:useBean id="messages" class="it.unitn.disi.filippo.beans.MessageQueue" scope="request"/>
+            <%if (!none) {%>
             <%if (messages.size() > 0) {%>
-            <ul>
+            <table>
+                <th>Aggiornamenti</th>
                 <%for (String msg : messages) {%>
-                <li><%=msg%></li>
+                <tr><td id="<%=messages.indexOf(msg)%>"><%=msg%></td></tr>
                     <%}%>
-            </ul>
+            </table>
             <%} else {%>
             <h2>Niente di nuovo al momento</h2>
             <%}%>
@@ -38,11 +39,19 @@
             <%} else {%>
             <h2>Nessun evento attivo</h2>
             <%}%>
+            <br>
+            <input id="rate" type="text" placeholder="<%=request.getAttribute("rate")%>">
         </div>
-        
+
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
+                messageCount = "<%=messages.size()%>";
+                if (messageCount && messageCount > 0) {
+                    highlight();
+                }
+                refreshRate = "<%=request.getAttribute("rate")%>";
                 window.history.replaceState({}, "", "Viewer");
+                refresh();
             });
         </script>
     </body>

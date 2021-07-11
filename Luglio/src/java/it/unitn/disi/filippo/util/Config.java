@@ -18,6 +18,7 @@ import javax.servlet.ServletContext;
 public class Config {
     
     public static final String queue = "queue";
+    public static final String defaultRefreshRate = "30";
     
     public static void initialize(ServletContext ctx) {
         ctx.setAttribute(queue, new MessageQueue());
