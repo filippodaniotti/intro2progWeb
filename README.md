@@ -54,7 +54,7 @@ Buono, adesso c'è il database. È possibile creare tabelle e inserire delle ent
 
 Passiamo al codice. Conviene prepararsi fin da subito le credenziali di accesso al database:
 ```java
-private String dbURL = "jdbc:derby://localhost:1527<nomeDB>";
+private String dbURL = "jdbc:derby://localhost:1527/<nomeDB>";
 private String user = "<usernameDB>";
 private String password = "<passwordDB>";
 public Connection conn = null;
@@ -96,7 +96,7 @@ Pare sia opportuno eseguire le query all'interno di un blocco `try-catch`.
 // PrintWriter out = abbiamo un PrintWriter
 try {
     Statement stmt = conn.createStatement();
-    String query = "SELECT * FROM SOME_TABLE;";
+    String query = "select * from SOME_TABLE"; // Non inserire ; nella query!
     ResultSet results = stmt.executeQuery(query);
     ResultSetMetaData md = results.getMetaData();
     while (results.next()) {
@@ -105,6 +105,6 @@ try {
         }
     }
 } catch (SQLException ex) {
-    out.println("Exception caught!");
+    ex.printStackTrace();
 }
 ```
