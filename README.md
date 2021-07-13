@@ -2,6 +2,46 @@
 
 ## Snippets per cose importanti
 
+### Alcuni elementi già pronti
+
+#### Header generico
+
+```jsp
+<% String username = (String) session.getAttribute("username");
+    String logout = "";
+    String login = "";
+    String user = "";
+    if (username != null) {
+        user = "<span style=\"color:white\">" + username + "</span>";
+        logout = "<a href=\"/2021_Giugno/Logout\" style=\"color:white; margin-left:2rem\">Logout</a>";
+    } else {
+        login = "<a href=\"/2021_Giugno/login.html\" style=\"color:white\">Login</a>";
+    }
+%>
+
+<nav class="navbar navbar-dark bg-dark">
+    <span style="color:white; margin-right: 10px">ASTE</span>
+    <a href="/2021_Giugno/HomeController" style="color:white; margin-right: 5px">Aperte</a>
+    <a href="/2021_Giugno/SoldController" style="color:white">Terminate</a>
+    <span class="spacer"></span>
+    <%= user %>
+    <%= logout %>
+    <%= login %>
+</nav>
+```
+
+#### Form di login generico
+
+```html
+<body class="text-center">
+  <form class="form-signin center" method="POST" action="/Giugno/createGame">
+    <h1 class="h3 mb-3 font-weight-normal">Please enter your name</h1>
+    <input type="text" class="form-control formInput" placeholder="Your username" name="username" required autofocus>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+  </form>
+</body>
+```
+
 ### Tricks per CSS
 
 #### Base
@@ -63,23 +103,54 @@ $(document).ready(function () {
 ```
 
 #### Recuperare un dato parametro dall'URL
+
 ```js
 function getUrlParam(parameter, defaultvalue) {
-    var urlparameter = defaultvalue;
-    if (window.location.href.indexOf(parameter) > -1) {
-        urlparameter = getUrlVars()[parameter];
-    }
-    return urlparameter;
+  var urlparameter = defaultvalue;
+  if (window.location.href.indexOf(parameter) > -1) {
+    urlparameter = getUrlVars()[parameter];
+  }
+  return urlparameter;
 }
 
 function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
-        vars[key] = value;
-    });
-    return vars;
+  var vars = {};
+  var parts = window.location.href.replace(
+    /[?&]+([^=&]+)=([^&]*)/gi,
+    function (m, key, value) {
+      vars[key] = value;
+    }
+  );
+  return vars;
 }
 ```
+
+#### Modificare l'URL corrente senza ricaricare
+
+```js
+window.history.replaceState({}, "", "Viewer");
+```
+
+### Recuperare e salvare destinazione in un filtro
+
+All'interno del filtro, se scopriamo che non esiste una sessione o che a questa non è associatoa lcun utente, possiamo attaccare alla richiesta la destinazione richiesta al server prima di reindirizzare con il `requestDispatcher`.
+
+```java
+String url = httpRequest.getServletPath();
+String queryString = httpRequest.getQueryString();
+if (queryString!=null) {
+  url = url + "?" + queryString;
+}
+request.setAttribute("destination", url);
+```
+
+A questo punto, possiamo ripassare la destinazione in una jsp di login come elemento HTML `input` con attributo `hidden`.
+
+```jsp
+<input type="hidden" name="destination" value="<%=request.getAttribute("destination")%>">
+```
+
+A questo punto possiamo recuperare la destinazione originaria come un qualsiasi altro parametro nella nostra servlet di autenticazione e ivi reindirizzare la richiesta in caso l'autenticazione andasse a buon fine.
 
 ### Derby
 
