@@ -16,6 +16,7 @@ public class Config {
     
     public static final String activeGames = "active";
     public static final String fixedCells = "fixed";
+    public static final String fixedCellsMap = "map";
     
     public static boolean isRed(int x, int y) {
         boolean red = false;

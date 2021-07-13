@@ -5,6 +5,8 @@
  */
 
 var fixedCells = [];
+var fixedCellsValues = {};
+
 function checkInput(x, y) {
     let text = $(`#${x}${y}`).val();
     let textInt = parseInt(text);
@@ -22,8 +24,9 @@ function initialize() {
         for (let j = 1; j < 10; ++j) {
             if (fixedCells.includes(`${i}${j}`)) {
                 let input = $(`#${i}${j}`);
-                input.prop('disabled', 'true');
-                input.val('this');
+                input.prop('disabled', 'disabled');
+                input.val(fixedCellsValues[`${i}${j}`]);
+                input.addClass('black');
             }
         }
     }
@@ -43,6 +46,8 @@ function checkCell() {
                 console.log(sol, current)
                 if (sol == current) {
                     msg += "Il valore nella cella selezionata è giusto";
+                    $(`#${row}${col}`).addClass('red');
+                    $(`#${row}${col}`).prop('disabled', 'disabled');
                 } else {
                     msg += "Il valore nella cella selezionata è sbagliato";                    
                 }

@@ -18,13 +18,33 @@ and open the template in the editor.
 
 table { 
     table-layout: fixed; 
-    width: 450px;
-    padding: 50px;
+    width: 300px;
 }
 td { 
+    padding: 5px;
     width: 33%; 
 }
 
-input {
+td > input {
     width: 100%;
+}
+
+input {
+    width: 30px;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.red {
+    color: red;
+}
+
+.black {
+    color: black;
 }

@@ -4,10 +4,12 @@
     Author     : Filippo
 --%>
 
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="it.unitn.disi.filippo.util.Config"%>
 <%
     ArrayList<String> cells = (ArrayList<String>) request.getAttribute(Config.fixedCells);
+    HashMap<String, String> fixed = (HashMap<String, String>) request.getAttribute(Config.fixedCellsMap);
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,7 +21,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <title>Game</title>
     </head>
-    <body>
+    <body class="center">
         <table>
             <%for (int i = 0; i < 9; ++i) {%>
             <tr>
@@ -50,6 +52,9 @@
             <%} else {%>
                 <%for (String cell : cells) {%>
                     fixedCells.push('<%=cell%>');
+                    <%if(fixed.get(cell) != null) {%>
+                        fixedCellsValues['<%=cell%>'] = '<%=fixed.get(cell)%>';
+                    <%}%>
                 <%}%>
                  initialize();
             <%}%>

@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,18 +49,36 @@ public class Game extends HttpServlet {
             view += "WEB-INF/Game.jsp";
             try {
                 Statement st = conn.createStatement();
-                String query = "select FIXEDCELLS from DATA where ID=" + id;
+                String query = "select FIXEDCELLS, SOLUTION from DATA where ID=" + id;
                 ResultSet rs = st.executeQuery(query);
                 String[] result = null;
+                String[] solution = null;
+                HashMap<String, String> fixedCellMap = new HashMap<>();
 
+                // retrieve fixed cells
                 while (rs.next()) {
                     result = rs.getString("FIXEDCELLS").split("\\s");
+                    solution = rs.getString("SOLUTION").split("\\s");
                 }
+                
                 ArrayList<String> cells = new ArrayList<>();
                 for (int i = 0; i < result.length; ++i) {
                     cells.add(result[i]);
                 }
+                
+                // Get solution for fixed cells
+                int x = 0;
+                int y = 0;
+                String current = null;
+                for (String cell : cells) {
+                    x = Character.getNumericValue(cell.charAt(0)) - 1;
+                    y = Character.getNumericValue(cell.charAt(1)) - 1;
+                    current = solution[x*9 + y];
+                    fixedCellMap.put(cell, current);
+                }
+                
                 request.setAttribute(Config.fixedCells, cells);
+                request.setAttribute(Config.fixedCellsMap, fixedCellMap);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
