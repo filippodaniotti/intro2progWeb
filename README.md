@@ -36,10 +36,48 @@
 <body class="text-center">
   <form class="form-signin center" method="POST" action="/Giugno/createGame">
     <h1 class="h3 mb-3 font-weight-normal">Please enter your name</h1>
-    <input type="text" class="form-control formInput" placeholder="Your username" name="username" required autofocus>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    <input
+      type="text"
+      class="form-control formInput"
+      placeholder="Your username"
+      name="username"
+      required
+      autofocus
+    />
+    <button class="btn btn-lg btn-primary btn-block" type="submit">
+      Submit
+    </button>
   </form>
 </body>
+```
+
+#### Tabella con ternary operator
+
+```jsp
+<table>
+  <%for (int i = 0; i < 9; ++i) {%>
+	  <tr>
+      <%for (int j = 0; j < 9; ++j) {%>
+        <td><input
+          type="text"
+          id="<%=i+1%><%=j+1%>"
+          class="<%= (Config.isRed(i, j) ? "rose" : "blue")%>"
+          onchange="checkInput('<%=i%>', '<%=j%>')">
+        </td>
+      <%}%>
+    </tr>
+  <%}%>
+</table>
+```
+
+#### Input field con bottone sulla destra
+```jsp
+<div class="input-group" id="wordField">
+  <input class="form-control" id="word" placeholder="Type your word" autofocus>
+  <span class="input-group-btn">
+    <button class="btn btn-primary" type="button" onclick="sendWord('<%=key%>', '<%=user%>')">Go!</button>
+  </span>
+</div>
 ```
 
 ### Tricks per CSS
@@ -65,6 +103,12 @@
   transform: translate(-50%, -50%);
 }
 
+#div1 {
+  display: block;
+  margin: auto;
+  width: /*anything under*/ 100%;
+}
+
 .hidden {
   visibility: hidden;
 }
@@ -86,7 +130,7 @@
 }
 ```
 
-### The Javascript survivall guide
+### The Javascript survival guide
 
 #### Associare un evento alla pressione di enter per un input field
 
@@ -129,6 +173,30 @@ function getUrlVars() {
 
 ```js
 window.history.replaceState({}, "", "Viewer");
+```
+
+#### Popolare struttura dati js con dati dinamici da jsp
+```jsp
+<script>
+  <!-- var fixedCells = [];
+	  var fixedCellsValues = {}; -->
+  $(document).ready(function () {
+    <%if (cells == null) {%>
+      window.alert("Error in generated game, you will be redirected to home");
+      setTimeout(function () {
+        window.location.replace('/Febbraio');
+        }, 2000);
+    <%} else {%>
+      <%for (String cell : cells) {%>
+        fixedCells.push('<%=cell%>');
+        <%if(fixed.get(cell) != null) {%>
+          fixedCellsValues['<%=cell%>'] = '<%=fixed.get(cell)%>';
+        <%}%>
+      <%}%>
+      initialize();
+    <%}%>
+    });
+</script>
 ```
 
 ### Recuperare e salvare destinazione in un filtro

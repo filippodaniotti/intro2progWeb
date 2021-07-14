@@ -40,6 +40,10 @@ public class Viewer extends HttpServlet {
         ServletContext ctx = getServletContext();
         MessageQueue all = (MessageQueue) ctx.getAttribute(Config.queue);
         if (all == null) {
+            // gestione del caso in cui non c'è un webcasting attivo
+            // (non esiste una coda nel ServletContext)
+            // refreshRate e messaggi letti vengono comunque inizializzati
+            // "di default" per ragioni di consistenza
             request.setAttribute("none", "true");
             session = request.getSession(true);
             session.setAttribute("read", "0");
